@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Trang Trại V.A.C</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="login-screen" class="login-container">
+        <div class="login-card">
+            <div class="login-logo"><i class="fa-solid fa-leaf"></i> V.A.C Smart Farm</div>
+            <h2>Đăng nhập hệ thống</h2>
+            <div class="input-group" style="margin-top: 20px;"><label>Tên đăng nhập</label><input type="text"
+                    id="username"></div>
+            <div class="input-group"><label>Mật khẩu</label><input type="password" id="password"></div>
+            <button class="btn btn-primary login-btn" onclick="handleLogin()">Đăng nhập</button>
+            <div class="login-hint">
+                <p><strong>Tài khoản Demo:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Nông dân: <code>admin</code>/<code>admin</code></li>
+                    <li>Khách hàng: <code>guest</code>/<code>guest</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-layout" style="display: none; width: 100%; height: 100vh;">
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <div>
+                    <h2>V.A.C Smart</h2><span id="user-role-badge"
+                        style="font-size: 0.8rem; background: #e0f2fe; color: #0284c7; padding: 2px 8px; border-radius: 10px;">Quản
+                        lý</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li id="menu-dashboard" class="active" onclick="switchModule('dashboard', this)"><i
+                        class="fa-solid fa-chart-line"></i> Quản lý V.A.C</li>
+                <li id="menu-blockchain" onclick="switchModule('blockchain', this)"><i class="fa-solid fa-link"></i>
+                    Nhật ký dữ liệu</li>
+                <li id="menu-chatbot" onclick="switchModule('chatbot', this)"><i class="fa-solid fa-robot"></i> Trợ lý
+                    AI Đa năng</li>
+                <li id="menu-history" onclick="switchModule('system-history', this)"><i
+                        class="fa-solid fa-clock-rotate-left"></i> Lịch sử truy cập</li>
+                <li style="margin-top: 50px; color: #ef4444;" onclick="handleLogout()"><i
+                        class="fa-solid fa-right-from-bracket"></i> Đăng xuất</li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <section id="dashboard" class="module active">
+                <h1 class="page-title">Hệ Sinh Thái V.A.C</h1>
+                <div class="cards-container">
+                    <div class="card card-green" onclick="openSubMenu('sub-vuon')"><i class="fa-solid fa-tree"></i>
+                        <h3>Khu Vườn Cây</h3>
+                    </div>
+                    <div class="card card-blue" onclick="openSubMenu('sub-ao')"><i class="fa-solid fa-water"></i>
+                        <h3>Khu Ao Nuôi</h3>
+                    </div>
+                    <div class="card card-orange" onclick="openSubMenu('sub-chuong')"><i class="fa-solid fa-paw"></i>
+                        <h3>Khu Chuồng Nuôi</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sub-vuon" class="module">
+                <button class="btn back-btn" onclick="backToMainDashboard()"><i class="fa-solid fa-arrow-left"></i> Trở
+                    về</button>
+                <h2 class="section-title"><i class="fa-solid fa-seedling"></i> Khu Vườn Cây</h2>
+                <div class="cards-container">
+                    <div class="card card-green" onclick="openZoneDetail('vuon_raumuong')">
+                        <h3>Rau Muống</h3>
+                    </div>
+                    <div class="card card-green" onclick="openZoneDetail('vuon_bapcai')">
+                        <h3>Bắp Cải</h3>
+                    </div>
+                    <div class="card card-green" onclick="openZoneDetail('vuon_carot')">
+                        <h3>Cà Rốt</h3>
+                    </div>
+                    <div class="card card-green" onclick="openZoneDetail('vuon_suhao')">
+                        <h3>Su Hào</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sub-ao" class="module">
+                <button class="btn back-btn" onclick="backToMainDashboard()"><i class="fa-solid fa-arrow-left"></i> Trở
+                    về</button>
+                <h2 class="section-title"><i class="fa-solid fa-water"></i> Khu Ao Nuôi</h2>
+                <div class="cards-container">
+                    <div class="card card-blue" onclick="openZoneDetail('ao_tom')">
+                        <h3>Ao Tôm</h3>
+                    </div>
+                    <div class="card card-blue" onclick="openZoneDetail('ao_ca')">
+                        <h3>Ao Cá</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sub-chuong" class="module">
+                <button class="btn back-btn" onclick="backToMainDashboard()"><i class="fa-solid fa-arrow-left"></i> Trở
+                    về</button>
+                <h2 class="section-title"><i class="fa-solid fa-paw"></i> Khu Chuồng Nuôi</h2>
+                <div class="cards-container">
+                    <div class="card card-orange" onclick="openZoneDetail('chuong_ga')">
+                        <h3>Chuồng Gà</h3>
+                    </div>
+                    <div class="card card-orange" onclick="openZoneDetail('chuong_bo')">
+                        <h3>Chuồng Bò</h3>
+                    </div>
+                    <div class="card card-orange" onclick="openZoneDetail('chuong_lon')">
+                        <h3>Chuồng Lợn</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="zone-detail" class="module">
+                <button class="btn back-btn" onclick="backToSubMenu()"><i class="fa-solid fa-arrow-left"></i> Trở về
+                    danh sách</button>
+                <div class="detail-header"><i id="detail-icon" class="fa-solid fa-tree"></i>
+                    <h1 id="detail-title">Đang tải...</h1>
+                </div>
+
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <h3><i class="fa-solid fa-satellite-dish"></i> Thông số môi trường</h3>
+                        <ul id="detail-stats" class="data-list"></ul>
+                    </div>
+
+                    <div class="detail-card" id="card-inventory" style="display: none; border-top-color: #0891b2;">
+                        <h3 style="color: #0891b2;"><i class="fa-solid fa-boxes-stacked"></i> Kho Thức Ăn</h3>
+                        <ul id="detail-inventory" class="data-list"></ul>
+                        <button class="btn btn-primary" onclick="openReplenishModal()"
+                            style="width: 100%; margin-top: 15px; background: #0891b2;"><i
+                                class="fa-solid fa-plus-circle"></i> Nhập thêm thức ăn</button>
+                    </div>
+
+                    <div class="detail-card">
+                        <h3><i class="fa-solid fa-microchip"></i> Thiết bị điều khiển</h3>
+                        <ul id="detail-devices" class="data-list"></ul>
+                    </div>
+
+                    <div class="detail-card full-width">
+                        <h3 style="color: #4f46e5;"><i class="fa-solid fa-file-signature"></i> Phiếu Ghi Chép Mùa Vụ
+                        </h3>
+                        <p style="color: #6b7280; font-size: 0.95rem; margin-bottom: 15px;">Đối tượng: <strong
+                                id="detail-crops"></strong></p>
+                        <div
+                            style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 20px;">
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                                <input type="date" id="log-date" class="select-box" style="margin: 0;">
+                                <input type="text" id="log-action" placeholder="Hoạt động (VD: Gieo hạt, Cho ăn...)"
+                                    class="select-box" style="margin: 0;">
+                                <input type="text" id="log-performedBy" placeholder="Người kiểm tra/thực hiện..."
+                                    class="select-box" style="margin: 0;">
+                                <input type="text" id="log-detail" placeholder="Chi tiết nội dung..." class="select-box"
+                                    style="margin: 0;">
+                            </div>
+                            <button class="btn btn-primary" onclick="submitFarmLog()"
+                                style="width: 100%; margin: 0; background: #4f46e5; padding: 12px; font-size: 1rem;"><i
+                                    class="fa-solid fa-check"></i> Lưu Phiếu Ký</button>
+                        </div>
+                        <div id="detail-farmlogs" class="timeline"></div>
+                    </div>
+
+                    <div id="cv-camera-section" class="detail-card full-width hidden"
+                        style="border-top: 4px solid #ef4444;">
+                        <h3><i class="fa-solid fa-video"></i> Camera AI Giám sát & Kiểm đếm</h3>
+                        <div class="camera-ui">
+                            <div class="camera-feed" style="position: relative; overflow: hidden; background: #1f2937;">
+                                <div id="camera-placeholder" style="text-align: center; margin-top: 40px;">
+                                    <i class="fa-solid fa-camera"
+                                        style="font-size: 3rem; color: #fff; margin-bottom: 10px;"></i>
+                                    <p id="camera-status" style="color: #fff;">🔴 CHƯA CÓ DỮ LIỆU</p>
+                                </div>
+                                <video id="preview-video" controls autoplay muted
+                                    style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"></video>
+                                <img id="preview-image"
+                                    style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+
+                            <div class="camera-controls">
+                                <p style="font-size: 0.95rem; font-weight: bold; margin-bottom: 5px;">Quét trực tiếp
+                                    (Camera Online):</p>
+                                <select id="cv-interval" class="select-box" style="margin-bottom: 10px;">
+                                    <option value="30">Tự động quét mỗi 30 phút / lần</option>
+                                    <option value="60">Tự động quét mỗi 1 giờ / lần</option>
+                                    <option value="0">Chỉ quét thủ công</option>
+                                </select>
+                                <button class="btn btn-primary" onclick="triggerCVCount()"
+                                    style="width: 100%; margin-bottom: 25px;"><i class="fa-solid fa-eye"></i> Bắt đầu
+                                    quét AI ngay</button>
+
+                                <p
+                                    style="font-size: 0.95rem; font-weight: bold; margin-bottom: 5px; border-top: 1px dashed #ccc; padding-top: 15px;">
+                                    Dự phòng Offline (Ảnh/Video):</p>
+                                <select id="cv-mode" class="select-box" style="margin-bottom: 10px;">
+                                    <option value="total">Chế độ Tổng (Đếm mọi vật thể)</option>
+                                    <option value="line">Chế độ Vạch ngang (Đếm ra/vào)</option>
+                                </select>
+                                <input type="file" id="mediaUpload" accept="video/*,image/*" class="select-box"
+                                    style="margin-bottom: 10px;">
+                                <button class="btn btn-primary" onclick="analyzeMedia()"
+                                    style="background: #eab308; width: 100%;"><i class="fa-solid fa-file-video"></i> Bắt
+                                    đầu đếm bằng AI</button>
+                                <div id="cv-result" class="cv-result-box hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="system-history" class="module">
+                <h1 class="page-title">Lịch sử Truy cập Hệ thống</h1>
+                <div
+                    style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; gap: 10px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb;">
+                    <label style="font-weight: 600; white-space: nowrap; color: #374151;">Từ ngày:</label>
+                    <input type="date" id="filter-start-date" class="select-box" style="margin: 0; width: auto;">
+                    <label style="font-weight: 600; white-space: nowrap; color: #374151; margin-left: 10px;">Đến
+                        ngày:</label>
+                    <input type="date" id="filter-end-date" class="select-box" style="margin: 0; width: auto;">
+                    <button class="btn btn-primary" onclick="filterLogsByDate()"
+                        style="margin: 0; padding: 8px 15px;"><i class="fa-solid fa-filter"></i> Lọc</button>
+                    <button class="btn" onclick="resetLogFilter()"
+                        style="margin: 0; background: #f3f4f6; color: #374151; padding: 8px 15px;"><i
+                            class="fa-solid fa-rotate-right"></i> Đặt lại</button>
+                </div>
+                <div class="card" style="min-height: 400px; overflow-y: auto; background: #f9fafb;">
+                    <div id="access-logs-container" class="timeline"></div>
+                </div>
+            </section>
+
+            <section id="blockchain" class="module">
+                <h1 class="page-title">Nhật ký Truy Xuất Dữ Liệu</h1>
+
+                <style>
+                    .search-box-bc {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 12px;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        background: #f8fafc;
+                        padding: 15px;
+                        border-radius: 8px;
+                        border: 1px solid #e5e7eb;
+                    }
+
+                    .search-box-bc input {
+                        height: 40px !important;
+                        box-sizing: border-box !important;
+                        border: 1px solid #cbd5e1 !important;
+                        border-radius: 6px !important;
+                        padding: 0 10px !important;
+                        font-size: 14px !important;
+                        outline: none !important;
+                        margin: 0 !important;
+                    }
+
+                    .btn-fixed-icon {
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        gap: 8px !important;
+                        height: 40px !important;
+                        padding: 0 20px !important;
+                        font-size: 15px !important;
+                        font-weight: 600 !important;
+                        border-radius: 6px !important;
+                        border: none !important;
+                        cursor: pointer !important;
+                        white-space: nowrap !important;
+                        line-height: 1 !important;
+                        margin: 0 !important;
+                        text-decoration: none !important;
+                    }
+
+                    /* Khóa chặt kích thước icon không cho phình to */
+                    .btn-fixed-icon i,
+                    .btn-fixed-icon svg {
+                        font-size: 16px !important;
+                        width: 16px !important;
+                        height: 16px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        line-height: 1 !important;
+                        display: block !important;
+                    }
+                </style>
+                <div class="blockchain-container card">
+
+                    <div class="search-box-bc">
+                        <input type="text" id="txHash" placeholder="Nhập tên nông sản (VD: gà thịt, rau muống)..."
+                            style="flex: 1; min-width: 200px; padding: 0 15px;">
+
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label style="font-weight: 600; margin: 0; color: #374151; font-size: 14px;">Từ
+                                ngày:</label>
+                            <input type="date" id="bc-start-date" style="width: 140px; font-family: inherit;">
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label style="font-weight: 600; margin: 0; color: #374151; font-size: 14px;">Đến
+                                ngày:</label>
+                            <input type="date" id="bc-end-date" style="width: 140px; font-family: inherit;">
+                        </div>
+
+                        <button class="btn-fixed-icon" style="background: #16a34a; color: white;"
+                            onclick="queryBlockchain()">
+                            <i class="fa-solid fa-magnifying-glass"></i> Truy Xuất
+                        </button>
+
+                        <button class="btn-fixed-icon" style="background: #10b981; color: white;"
+                            onclick="exportBlockchainCSV()">
+                            <i class="fa-solid fa-file-excel"></i> Xuất Excel
+                        </button>
+                    </div>
+
+                    <div id="bcResult" class="hidden"
+                        style="overflow-x: auto; background: #fff; border-radius: 8px; border: 1px solid #e5e7eb;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="background: #f3f4f6; border-bottom: 2px solid #d1d5db;">
+                                    <th style="padding: 12px; min-width: 150px;">Thời gian</th>
+                                    <th style="padding: 12px; min-width: 120px;">Công việc</th>
+                                    <th style="padding: 12px;">Chi tiết</th>
+                                    <th style="padding: 12px; min-width: 150px;">Người thực hiện</th>
+                                    <th style="padding: 12px; min-width: 180px;">Bằng chứng (TxID)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bc-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chatbot" class="module">
+                <h1 class="page-title">Trợ lý AI Đa năng (Gemini)</h1>
+                <div class="chat-container card">
+                    <div class="chat-history" id="chatHistory">
+                        <div class="message bot-message">Xin chào! Tôi là Trợ lý AI nông nghiệp. Tôi có thể chẩn đoán
+                            bệnh qua hình ảnh hoặc giải đáp mọi thắc mắc của bạn!</div>
+                    </div>
+
+                    <div id="chat-image-preview-container"
+                        style="display: none; padding: 10px; border-top: 1px solid #e5e7eb; position: relative; background: #f9fafb;">
+                        <img id="chatImagePreview" src=""
+                            style="height: 60px; border-radius: 6px; border: 1px solid #d1d5db; object-fit: cover;">
+                        <button onclick="removeChatImage()"
+                            style="position: absolute; top: 5px; left: 65px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 10px; display: flex; align-items: center; justify-content: center;"><i
+                                class="fa-solid fa-times"></i></button>
+                    </div>
+
+                    <div class="chat-input-area" style="padding-top: 10px;">
+                        <input type="file" id="chatImageInput" accept="image/*" hidden>
+                        <button onclick="document.getElementById('chatImageInput').click()"
+                            style="background: transparent; color: #6b7280; padding: 0 10px; flex-shrink: 0;"><i
+                                class="fa-solid fa-paperclip" style="font-size: 1.2rem;"></i></button>
+                        <input type="text" id="userInput" placeholder="Nhập câu hỏi của bạn...">
+                        <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="device-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="modal-device-name"
+                style="color: #4f46e5; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;"><i
+                    class="fa-solid fa-power-off"></i> Tên thiết bị</h3>
+            <p id="modal-device-prompt" style="margin-bottom: 15px; font-size: 1.05rem; color: #374151;">Bạn có chắc
+                chắn muốn điều khiển?</p>
+
+            <div
+                style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-bottom: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 5px;">👤 Người thực hiện:</label>
+                    <input type="text" id="modal-device-performedBy" placeholder="Tên người thực hiện..."
+                        class="select-box" style="width: 100%;">
+                </div>
+                <div id="modal-qty-container" class="hidden"
+                    style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 5px;">🌽 Loại thức ăn xuất
+                            kho:</label>
+                        <select id="modal-device-food-type" class="select-box"
+                            style="width: 100%; border-color: #3b82f6;" onchange="updateInventoryDisplay()"></select>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label style="font-weight: 600; margin: 0;">⚖️ Định lượng (kg):</label>
+                        <span id="modal-inventory-display"
+                            style="font-size: 0.85rem; padding: 3px 10px; border-radius: 12px; font-weight: bold;">Kho
+                            còn: -- kg</span>
+                    </div>
+                    <input type="number" id="modal-device-qty" placeholder="Nhập số kg (VD: 5)..." class="select-box"
+                        style="width: 100%; margin: 0; border-color: #3b82f6;">
+                </div>
+                <label style="font-weight: 600; display: block; margin-bottom: 8px;">⏱ Hẹn giờ chạy (Tùy chọn):</label>
+                <input type="number" id="modal-device-timer" placeholder="Nhập số phút (VD: 30)..." class="select-box"
+                    style="width: 100%; margin: 0;">
+                <small style="color: #6b7280; display: block; margin-top: 5px;">* Bỏ trống nếu muốn chạy liên
+                    tục.</small>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="closeDeviceModal()"
+                    style="flex: 1; background: #e5e7eb; color: #374151; margin: 0;">Hủy bỏ</button>
+                <button id="modal-confirm-btn" class="btn btn-primary" onclick="confirmDeviceAction()"
+                    style="flex: 1; margin: 0;">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="replenish-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="border-top: 5px solid #0891b2;">
+            <h3 style="color: #0891b2; margin-bottom: 10px;"><i class="fa-solid fa-truck-loading"></i> Nhập kho thức ăn
+            </h3>
+            <p style="margin-bottom: 15px; color: #4b5563;">Vui lòng nhập thông tin cám/cỏ mới được bổ sung vào kho.</p>
+            <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 8px;">Loại thức ăn:</label>
+                <input type="text" id="replenish-type" placeholder="VD: Cám ngô, Cỏ voi, Cám cá..." class="select-box"
+                    style="width: 100%; margin: 0 0 15px 0; border-color: #0891b2;">
+                <label style="font-weight: bold; display: block; margin-bottom: 8px;">Khối lượng nhập thêm (kg):</label>
+                <input type="number" id="replenish-qty" placeholder="VD: 100" class="select-box"
+                    style="width: 100%; margin: 0 0 15px 0; border-color: #0891b2;">
+                <label style="font-weight: bold; display: block; margin-bottom: 8px;">👤 Người nhập kho:</label>
+                <input type="text" id="replenish-performedBy" placeholder="Tên người thực hiện..." class="select-box"
+                    style="width: 100%; margin: 0; border-color: #0891b2;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="closeReplenishModal()"
+                    style="flex: 1; background: #e5e7eb; color: #374151; margin: 0;">Hủy bỏ</button>
+                <button class="btn btn-primary" onclick="confirmReplenish()"
+                    style="flex: 1; background: #0891b2; margin: 0;">Xác nhận Nhập</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

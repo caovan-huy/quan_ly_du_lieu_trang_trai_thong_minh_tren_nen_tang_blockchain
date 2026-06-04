@@ -46,9 +46,9 @@ Nguyên lý hoạt động của hệ thống dựa trên cơ chế đồng thu�
 <p align="center"><i>Ảnh 1: Giao diện Quản lý Tài sản & Hệ sinh thái V.A.C</i></p>
 
 <p align="center">
-  <img width="800" src="https://via.placeholder.com/800x400.png?text=Hinh+anh+Lich+su+Blockchain+cua+ban+(Thay+link+vao+day)" alt="Lịch sử Blockchain" />
+  <img width="800" src="https://github.com/caovan-huy/quan_ly_du_lieu_trang_trai_thong_minh_tren_nen_tang_blockchain/blob/main/dl.png" alt="Giao diện nhật ký dữ liệu" />
 </p>
-<p align="center"><i>Ảnh 2: Tra cứu Lịch sử Giao dịch và Truy xuất nguồn gốc trên Sổ cái (Ledger)</i></p>
+<p align="center"><i>Ảnh 2: Giao diện nhật ký dữ liệu</i></p>
 
 ## 📦 4. Các bước cài đặt
 ### Yêu cầu hệ thống

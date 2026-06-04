@@ -41,7 +41,7 @@ Nguyên lý hoạt động của hệ thống dựa trên cơ chế đồng thu�
 
 ## 🚀 3. Hình ảnh các chức năng
 <p align="center">
-  <img width="800" src="https://via.placeholder.com/800x400.png?text=Hinh+anh+Dashboard+cua+ban+(Thay+link+vao+day)" alt="Giao diện Dashboard" /> 
+  <img width="800" src="https://github.com/caovan-huy/quan_ly_du_lieu_trang_trai_thong_minh_tren_nen_tang_blockchain/blob/main/dashboard.png" alt="Giao diện Dashboard" /> 
 </p>
 <p align="center"><i>Ảnh 1: Giao diện Quản lý Tài sản & Hệ sinh thái V.A.C</i></p>
 

@@ -1,6 +1,6 @@
 <h2 align="center">
     <a href="https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin">
-    🎓 Faculty of Information Technology (DaiNam University)
+    🎓 Khoa Công Nghệ Thông Tin
     </a>
 </h2>
 <h2 align="center">
